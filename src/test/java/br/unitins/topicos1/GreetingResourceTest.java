@@ -101,6 +101,7 @@ public class GreetingResourceTest {
                                 .when().delete("/clientes/" + id)
                                 .then()
                                 .statusCode(204);
+
         }
 
         @Test

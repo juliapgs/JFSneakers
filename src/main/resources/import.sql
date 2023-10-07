@@ -34,4 +34,3 @@ insert into funcionario_telefone (id_funcionario, id_telefone) values(1, 4);
 insert into funcionario_telefone (id_funcionario, id_telefone) values(2, 5);
 insert into funcionario_telefone (id_funcionario, id_telefone) values(3, 6);
 
---insert into carrinho (produto) values(1);

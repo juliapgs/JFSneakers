@@ -2,6 +2,7 @@ package br.unitins.topicos1.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import br.unitins.topicos1.dto.FuncionarioDTO;
 import br.unitins.topicos1.dto.FuncionarioResponseDTO;
@@ -12,7 +13,9 @@ import br.unitins.topicos1.repository.FuncionarioRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.NotFoundException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Validator;
 
 @ApplicationScoped
 public class FuncionarioServiceImpl implements FuncionarioService {
@@ -20,16 +23,29 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Inject
     FuncionarioRepository repository;
 
+    @Inject
+    Validator validator;
+
+    private void validar(FuncionarioDTO funcionarioDTO) throws ConstraintViolationException {
+        Set<ConstraintViolation<FuncionarioDTO>> violations = validator.validate(funcionarioDTO);
+
+        if (!violations.isEmpty())
+            throw new ConstraintViolationException(violations);
+    }
+
     @Override
     @Transactional
-    public FuncionarioResponseDTO insert(FuncionarioDTO dto){
+    public FuncionarioResponseDTO insert(FuncionarioDTO dto) {
+
+        validar(dto);
+
         Funcionario novoFuncionario = new Funcionario();
         novoFuncionario.setNome(dto.nome());
         novoFuncionario.setEmail(dto.email());
         novoFuncionario.setSenha(dto.senha());
 
-        if (dto.listaTelefone() != null && 
-                    !dto.listaTelefone().isEmpty()){
+        if (dto.listaTelefone() != null &&
+                !dto.listaTelefone().isEmpty()) {
             novoFuncionario.setListaTelefone(new ArrayList<Telefone>());
             for (TelefoneDTO tel : dto.listaTelefone()) {
                 Telefone telefone = new Telefone();
@@ -54,15 +70,14 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
         // falta a implementacao dos telefones
         // vcs (ALUNOS) devem implementar!!!!!
-        
+
         return FuncionarioResponseDTO.valueOf(funcionario);
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        if (!repository.deleteById(id)) 
-            throw new NotFoundException();
+
     }
 
     @Override
@@ -72,13 +87,13 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
     @Override
     public List<FuncionarioResponseDTO> findByNome(String nome) {
-        return repository.findByNome(nome).stream()
-            .map(e -> FuncionarioResponseDTO.valueOf(e)).toList();
+        return null;
     }
 
     @Override
     public List<FuncionarioResponseDTO> findByAll() {
         return repository.listAll().stream()
-            .map(e -> FuncionarioResponseDTO.valueOf(e)).toList();
+                .map(e -> FuncionarioResponseDTO.valueOf(e)).toList();
     }
+
 }

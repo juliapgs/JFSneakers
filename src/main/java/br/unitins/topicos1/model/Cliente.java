@@ -16,9 +16,7 @@ public class Cliente extends DefaultEntity {
     private String senha;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(name="cliente_telefone",
-        joinColumns= @JoinColumn(name="id_cliente"),
-        inverseJoinColumns = @JoinColumn(name="id_telefone") )
+    @JoinTable(name = "cliente_telefone", joinColumns = @JoinColumn(name = "id_cliente"), inverseJoinColumns = @JoinColumn(name = "id_telefone"))
     private List<Telefone> listaTelefone;
 
     public String getNome() {

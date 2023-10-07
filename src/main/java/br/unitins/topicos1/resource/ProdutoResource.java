@@ -4,7 +4,6 @@ import br.unitins.topicos1.dto.ProdutoDTO;
 import br.unitins.topicos1.dto.ProdutoResponseDTO;
 import br.unitins.topicos1.service.ProdutoService;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -30,11 +29,10 @@ public class ProdutoResource {
     public Response insert(@Valid ProdutoDTO dto) {
         ProdutoResponseDTO retorno = service.insert(dto);
         return Response.status(Status.CREATED).entity(retorno).build();
-       // return Response.status(201).entity(retorno).build();
+        // return Response.status(201).entity(retorno).build();
     }
 
     @PUT
-    @Transactional
     @Path("/{id}")
     public Response update(ProdutoDTO dto, @PathParam("id") Long id) {
         service.update(dto, id);
@@ -42,7 +40,6 @@ public class ProdutoResource {
     }
 
     @DELETE
-    @Transactional
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);
@@ -59,7 +56,7 @@ public class ProdutoResource {
     public Response findById(@PathParam("id") Long id) {
         return Response.ok(service.findById(id)).build();
     }
-    
+
     @GET
     @Path("/search/modelo/{modelo}")
     public Response findByModelo(@PathParam("modelo") String modelo) {

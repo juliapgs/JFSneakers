@@ -5,7 +5,6 @@ import br.unitins.topicos1.dto.ClienteResponseDTO;
 import br.unitins.topicos1.service.ClienteService;
 
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -33,7 +32,6 @@ public class ClienteResource {
     }
 
     @PUT
-    @Transactional
     @Path("/{id}")
     public Response update(ClienteDTO dto, @PathParam("id") Long id) {
         service.update(dto, id);
@@ -41,7 +39,6 @@ public class ClienteResource {
     }
 
     @DELETE
-    @Transactional
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);

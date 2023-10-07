@@ -5,7 +5,6 @@ import br.unitins.topicos1.dto.PedidoResponseDTO;
 import br.unitins.topicos1.model.FormaPagamento;
 import br.unitins.topicos1.service.PedidoService;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -29,7 +28,6 @@ public class PedidoResource {
     }
 
     @PUT
-    @Transactional
     @Path("/{id}")
     public Response update(PedidoDTO dto, @PathParam("id") Long id) {
         try {
@@ -41,7 +39,6 @@ public class PedidoResource {
     }
 
     @DELETE
-    @Transactional
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         try {

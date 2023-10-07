@@ -45,8 +45,7 @@ public class ClienteServiceImpl implements ClienteService {
         novoCliente.setEmail(dto.email());
         novoCliente.setSenha(dto.senha());
 
-        if (dto.agenda() != null &&
-                !dto.agenda().isEmpty()) {
+        if (dto.agenda() != null && !dto.agenda().isEmpty()) {
             novoCliente.setAgenda(new ArrayList<Telefone>());
             for (TelefoneDTO tel : dto.agenda()) {
                 Telefone telefone = new Telefone();
@@ -69,21 +68,17 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setNome(dto.nome());
         cliente.setSenha(dto.senha());
 
-        List<Telefone> telefones = new ArrayList<Telefone>();
-
         if (dto.agenda() != null && !dto.agenda().isEmpty()) {
             cliente.setAgenda(new ArrayList<Telefone>());
             for (TelefoneDTO tel : dto.agenda()) {
                 Telefone telefone = new Telefone();
-
                 telefone.setCodigoArea(tel.codigoArea());
                 telefone.setNumero(tel.numero());
-
-                telefones.add(telefone);
+                cliente.getAgenda().add(telefone);
             }
         }
 
-        cliente.setAgenda(telefones);
+        repository.persist(cliente);
 
         return ClienteResponseDTO.valueOf(cliente);
     }

@@ -45,8 +45,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         novoFuncionario.setEmail(dto.email());
         novoFuncionario.setSenha(dto.senha());
 
-        if (dto.agenda() != null &&
-                !dto.agenda().isEmpty()) {
+        if (dto.agenda() != null && !dto.agenda().isEmpty()) {
             novoFuncionario.setAgenda(new ArrayList<Telefone>());
             for (TelefoneDTO tel : dto.agenda()) {
                 Telefone telefone = new Telefone();
@@ -69,21 +68,17 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         funcionario.setNome(dto.nome());
         funcionario.setSenha(dto.senha());
 
-        List<Telefone> telefones = new ArrayList<Telefone>();
-
         if (dto.agenda() != null && !dto.agenda().isEmpty()) {
             funcionario.setAgenda(new ArrayList<Telefone>());
             for (TelefoneDTO tel : dto.agenda()) {
                 Telefone telefone = new Telefone();
-
                 telefone.setCodigoArea(tel.codigoArea());
                 telefone.setNumero(tel.numero());
-
-                telefones.add(telefone);
+                funcionario.getAgenda().add(telefone);
             }
         }
 
-        funcionario.setAgenda(telefones);
+        repository.persist(funcionario);
 
         return FuncionarioResponseDTO.valueOf(funcionario);
     }

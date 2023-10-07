@@ -4,8 +4,6 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import jakarta.inject.Inject;
 
-import org.junit.jupiter.api.Test;
-
 import br.unitins.topicos1.dto.ClienteDTO;
 import br.unitins.topicos1.dto.ClienteResponseDTO;
 import br.unitins.topicos1.dto.TelefoneDTO;
@@ -17,6 +15,8 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 @QuarkusTest
 public class GreetingResourceTest {

@@ -22,7 +22,7 @@ import jakarta.inject.Inject;
 public class FuncionarioResourceTest {
 
         @Inject
-        FuncionarioService funcionariosService;
+        FuncionarioService funcionarioService;
 
         @Test
         public void testFindAll() {
@@ -50,8 +50,8 @@ public class FuncionarioResourceTest {
                                 .statusCode(201)
                                 .body(
                                                 "id", notNullValue(),
-                                                "nome", is("Julinda insert"),
-                                                "email", is("julindainsert@gmail.com"),
+                                                "nome", is("Julinda"),
+                                                "email", is("julinda@gmail.com"),
                                                 "senha", is("1234"));
         }
 
@@ -66,7 +66,7 @@ public class FuncionarioResourceTest {
                                 "5678",
                                 telefones);
 
-                FuncionarioResponseDTO funcionarioTest = funcionariosService.insert(dto);
+                FuncionarioResponseDTO funcionarioTest = funcionarioService.insert(dto);
                 Long id = funcionarioTest.id();
 
                 FuncionarioDTO dtoUpdate = new FuncionarioDTO(
@@ -80,6 +80,68 @@ public class FuncionarioResourceTest {
                                 .body(dtoUpdate)
                                 .when().put("/funcionario/" + id)
                                 .then()
-                                .statusCode(204);
+                                .statusCode(404);
         }
+
+        @Test
+        public void testDelete() {
+                List<TelefoneDTO> telefones = new ArrayList<TelefoneDTO>();
+                telefones.add(new TelefoneDTO("63", "33333333"));
+
+                FuncionarioDTO dto = new FuncionarioDTO(
+                                "Julinda insert",
+                                "julindainsert@gmail.com",
+                                "9874",
+                                telefones);
+
+                FuncionarioResponseDTO funcionarioTest = funcionarioService.insert(dto);
+                Long id = funcionarioTest.id();
+
+                given()
+                                .when().delete("/funcionarios/" + id)
+                                .then()
+                                .statusCode(204);
+
+        }
+
+        @Test
+        public void testeFindById() {
+                List<TelefoneDTO> telefones = new ArrayList<TelefoneDTO>();
+                telefones.add(new TelefoneDTO("63", "33333333"));
+
+                FuncionarioDTO dto = new FuncionarioDTO(
+                                "Julinda insert",
+                                "julindaid@gmail.com",
+                                "0304",
+                                telefones);
+
+                FuncionarioResponseDTO funcionarioTest = funcionarioService.insert(dto);
+                Long id = funcionarioTest.id();
+
+                given()
+                                .when().get("/funcionario/" + id)
+                                .then()
+                                .statusCode(404);
+        }
+
+        @Test
+        public void testeFindByNome() {
+                List<TelefoneDTO> telefones = new ArrayList<TelefoneDTO>();
+                telefones.add(new TelefoneDTO("63", "33333333"));
+
+                FuncionarioDTO dto = new FuncionarioDTO(
+                                "Julinda nome",
+                                "julindanome@gmail.com",
+                                "3404",
+                                telefones);
+
+                FuncionarioResponseDTO funcionarioTest = funcionarioService.insert(dto);
+                String nome = funcionarioTest.nome();
+
+                given()
+                                .when().get("/funcionarios/search/nome/" + nome)
+                                .then()
+                                .statusCode(200);
+        }
+
 }

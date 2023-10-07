@@ -2,34 +2,16 @@ package br.unitins.topicos1.dto;
 
 import br.unitins.topicos1.model.FormaPagamento;
 import br.unitins.topicos1.model.StatusPedido;
-
-import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class PedidoDTO {
 
-    @NotNull(message = "O campo cliente não pode ser nulo.")
     private Long clienteId;
-
-    @NotNull(message = "O campo produto não pode ser nulo.")
     private Long produtoId;
-
-    @NotNull(message = "O campo dataCompra não pode ser nulo.")
+    private Long enderecoId;
     private LocalDate dataCompra;
-
-    @NotNull(message = "O campo formaPagamento não pode ser nulo.")
     private FormaPagamento formaPagamento;
-
-    @NotNull(message = "O campo statusPedido não pode ser nulo.")
     private StatusPedido statusPedido;
-
-    public PedidoDTO( Long clienteId, Long produtoId, LocalDate dataCompra, FormaPagamento formaPagamento, StatusPedido statusPedido) {
-        this.clienteId = clienteId;
-        this.produtoId = produtoId;
-        this.dataCompra = dataCompra;
-        this.formaPagamento = formaPagamento;
-        this.statusPedido = statusPedido;
-    }
 
     public Long getClienteId() {
         return clienteId;
@@ -38,12 +20,12 @@ public class PedidoDTO {
     public void setClienteId(Long clienteId) {
         this.clienteId = clienteId;
     }
-   
-    public Long getProdutoId() {
+
+    public Long getProdutoId() { // Adicione este método
         return produtoId;
     }
 
-    public void setProdutoId(Long produtoId) {
+    public void setProdutoId(Long produtoId) { // Adicione este método
         this.produtoId = produtoId;
     }
 
@@ -69,5 +51,13 @@ public class PedidoDTO {
 
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
+    }
+
+    public Long getEnderecoId() {
+        return enderecoId;
+    }
+
+    public void setEnderecoId(Long enderecoId) {
+        this.enderecoId = enderecoId;
     }
 }

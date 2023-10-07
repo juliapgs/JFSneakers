@@ -10,11 +10,14 @@ import java.time.LocalDate;
 @Entity
 public class Pedido extends DefaultEntity {
 
-     @Column(name = "id_cliente", nullable = false)
-     private Long clienteId;
+    @Column(name = "id_cliente", nullable = false)
+    private Long clienteId;
 
-     @Column(name = "id_pedido", nullable = false)
-     private Long produtoId;
+    @Column(name = "id_produto", nullable = false)
+    private Long produtoId;
+    
+    @Column(name = "id_endereco", nullable = false) 
+    private Long enderecoId;
 
     @Column(nullable = false)
     private LocalDate dataCompra;
@@ -42,7 +45,7 @@ public class Pedido extends DefaultEntity {
     public void setProdutoId(Long produtoId) {
         this.produtoId = produtoId;
     }
-    
+
     public LocalDate getDataCompra() {
         return dataCompra;
     }
@@ -66,4 +69,14 @@ public class Pedido extends DefaultEntity {
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
     }
+
+    public Long getEnderecoId() {
+        return enderecoId;
+    }
+
+    public void setEnderecoId(Long enderecoId) {
+        this.enderecoId = enderecoId;
+    }
+
+    
 }

@@ -21,9 +21,9 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Inject
     ClienteService clienteService;
-
+    
     @Inject
-    PedidoService pedidoService;
+    EnderecoService enderecoService;
 
     @Override
     @Transactional
@@ -35,6 +35,7 @@ public class PedidoServiceImpl implements PedidoService {
 
         novoPedido.setClienteId(dto.getClienteId());
         novoPedido.setProdutoId(dto.getProdutoId());
+        novoPedido.setEnderecoId(dto.getEnderecoId());
 
         repository.persist(novoPedido);
 
@@ -52,6 +53,7 @@ public class PedidoServiceImpl implements PedidoService {
 
             pedido.setClienteId(dto.getClienteId());
             pedido.setProdutoId(dto.getProdutoId());
+            pedido.setEnderecoId(dto.getEnderecoId());
         } else {
             throw new NotFoundException();
         }

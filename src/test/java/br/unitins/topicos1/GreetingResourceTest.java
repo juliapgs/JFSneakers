@@ -50,8 +50,8 @@ public class GreetingResourceTest {
                                 .statusCode(201)
                                 .body(
                                                 "id", notNullValue(),
-                                                "nome", is("Julinda insert"),
-                                                "email", is("julindainsert@gmail.com"),
+                                                "nome", is("Julinda"),
+                                                "email", is("julinda@gmail.com"),
                                                 "senha", is("1234"));
         }
 

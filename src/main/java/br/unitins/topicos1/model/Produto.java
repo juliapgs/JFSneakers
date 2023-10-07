@@ -74,7 +74,6 @@ public class Produto extends DefaultEntity {
     public void setValor(Double valor) {
         this.valor = valor;
     }
-
 }
 
  

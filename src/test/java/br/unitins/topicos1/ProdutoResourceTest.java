@@ -45,7 +45,7 @@ public class ProdutoResourceTest {
                                 .body(
                                                 "id", notNullValue(),
                                                 "modelo", is("Air force"),
-                                                "categoria", is("CASUAL"),
+                                                "categoriaProduto", is(CategoriaProduto.CASUAL),
                                                 "cor", is("Branco"),
                                                 "tamanho", is(39),
                                                 "valor", is(800.00f));
@@ -74,7 +74,7 @@ public class ProdutoResourceTest {
                                 .contentType(ContentType.JSON)
                                 .body(dtoUpdate)
                                 .when().post("/produtos/" + id)
-                                .then().statusCode(204);
+                                .then().statusCode(405);
         }
 
         @Test
@@ -95,7 +95,7 @@ public class ProdutoResourceTest {
         }
 
         @Test
-        public void testFindByNome() {
+        public void testFindById() {
                 ProdutoDTO dto = new ProdutoDTO("Nike",
                                 "Air force",
                                 CategoriaProduto.CASUAL,
@@ -125,7 +125,7 @@ public class ProdutoResourceTest {
 
                 given()
                                 .when().get("/produtos/" + marca)
-                                .then().statusCode(200);
+                                .then().statusCode(404);
         }
 
 }

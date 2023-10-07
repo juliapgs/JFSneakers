@@ -16,6 +16,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
 public class FuncionarioServiceImpl implements FuncionarioService {
@@ -44,14 +45,14 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         novoFuncionario.setEmail(dto.email());
         novoFuncionario.setSenha(dto.senha());
 
-        if (dto.listaTelefone() != null &&
-                !dto.listaTelefone().isEmpty()) {
-            novoFuncionario.setListaTelefone(new ArrayList<Telefone>());
-            for (TelefoneDTO tel : dto.listaTelefone()) {
+        if (dto.agenda() != null &&
+                !dto.agenda().isEmpty()) {
+            novoFuncionario.setAgenda(new ArrayList<Telefone>());
+            for (TelefoneDTO tel : dto.agenda()) {
                 Telefone telefone = new Telefone();
                 telefone.setCodigoArea(tel.codigoArea());
                 telefone.setNumero(tel.numero());
-                novoFuncionario.getListaTelefone().add(telefone);
+                novoFuncionario.getAgenda().add(telefone);
             }
         }
 
@@ -68,8 +69,21 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         funcionario.setNome(dto.nome());
         funcionario.setSenha(dto.senha());
 
-        // falta a implementacao dos telefones
-        // vcs (ALUNOS) devem implementar!!!!!
+        List<Telefone> telefones = new ArrayList<Telefone>();
+
+        if (dto.agenda() != null && !dto.agenda().isEmpty()) {
+            funcionario.setAgenda(new ArrayList<Telefone>());
+            for (TelefoneDTO tel : dto.agenda()) {
+                Telefone telefone = new Telefone();
+
+                telefone.setCodigoArea(tel.codigoArea());
+                telefone.setNumero(tel.numero());
+
+                telefones.add(telefone);
+            }
+        }
+
+        funcionario.setAgenda(telefones);
 
         return FuncionarioResponseDTO.valueOf(funcionario);
     }
@@ -77,7 +91,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     @Transactional
     public void delete(Long id) {
-
+        if (!repository.deleteById(id))
+            throw new NotFoundException();
     }
 
     @Override
@@ -87,7 +102,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
     @Override
     public List<FuncionarioResponseDTO> findByNome(String nome) {
-        return null;
+        return repository.findByNome(nome).stream()
+                .map(e -> FuncionarioResponseDTO.valueOf(e)).toList();
     }
 
     @Override

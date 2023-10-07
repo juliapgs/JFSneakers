@@ -21,10 +21,10 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Inject
     ClienteService clienteService;
-    
+
     @Inject
-    PedidoService pedidoService; 
-    
+    PedidoService pedidoService;
+
     @Override
     @Transactional
     public PedidoResponseDTO insert(PedidoDTO dto) {
@@ -35,7 +35,7 @@ public class PedidoServiceImpl implements PedidoService {
 
         novoPedido.setClienteId(dto.getClienteId());
         novoPedido.setProdutoId(dto.getProdutoId());
-        
+
         repository.persist(novoPedido);
 
         return PedidoResponseDTO.valueOf(novoPedido);
@@ -72,7 +72,7 @@ public class PedidoServiceImpl implements PedidoService {
         return PedidoResponseDTO.valueOf(repository.findById(id));
     }
 
-     @Override
+    @Override
     public List<PedidoResponseDTO> findAll() {
         List<Pedido> pedidos = repository.listAll();
         return pedidos.stream()
@@ -80,7 +80,7 @@ public class PedidoServiceImpl implements PedidoService {
                 .collect(Collectors.toList());
     }
 
-     @Override
+    @Override
     public List<PedidoResponseDTO> findByFormaPagamento(FormaPagamento formaPagamento) {
         List<Pedido> pedidos = repository.list("formaPagamento", formaPagamento);
         return pedidos.stream()

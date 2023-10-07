@@ -6,6 +6,6 @@ public record FuncionarioDTO(
                 String nome,
                 String email,
                 String senha,
-                List<TelefoneDTO> listaTelefone) {
+                List<TelefoneDTO> agenda) {
 
 }

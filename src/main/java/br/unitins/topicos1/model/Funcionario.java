@@ -16,10 +16,8 @@ public class Funcionario extends DefaultEntity {
     private String senha;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(name="funcionario_telefone",
-        joinColumns= @JoinColumn(name="id_funcionario"),
-        inverseJoinColumns = @JoinColumn(name="id_telefone") )
-    private List<Telefone> listaTelefone;
+    @JoinTable(name = "funcionario_telefone", joinColumns = @JoinColumn(name = "id_funcionario"), inverseJoinColumns = @JoinColumn(name = "id_telefone"))
+    private List<Telefone> agenda;
 
     public String getNome() {
         return nome;
@@ -45,12 +43,12 @@ public class Funcionario extends DefaultEntity {
         this.senha = senha;
     }
 
-    public List<Telefone> getListaTelefone() {
-        return listaTelefone;
+    public List<Telefone> getAgenda() {
+        return agenda;
     }
 
-    public void setListaTelefone(List<Telefone> listaTelefone) {
-        this.listaTelefone = listaTelefone;
+    public void setAgenda(List<Telefone> agenda) {
+        this.agenda = agenda;
     }
 
 }

@@ -8,7 +8,7 @@ public record ClienteResponseDTO(
         String nome,
         String email,
         String senha,
-        List<TelefoneDTO> listaTelefone) {
+        List<TelefoneDTO> agenda) {
 
     public static ClienteResponseDTO valueOf(Cliente cliente) {
 
@@ -17,7 +17,7 @@ public record ClienteResponseDTO(
                 cliente.getNome(),
                 cliente.getEmail(),
                 cliente.getSenha(),
-                cliente.getListaTelefone()
+                cliente.getAgenda()
                         .stream()
                         .map(t -> TelefoneDTO.valueOf(t))
                         .toList());

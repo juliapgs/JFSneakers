@@ -45,14 +45,14 @@ public class ClienteServiceImpl implements ClienteService {
         novoCliente.setEmail(dto.email());
         novoCliente.setSenha(dto.senha());
 
-        if (dto.listaTelefone() != null &&
-                !dto.listaTelefone().isEmpty()) {
-            novoCliente.setListaTelefone(new ArrayList<Telefone>());
-            for (TelefoneDTO tel : dto.listaTelefone()) {
+        if (dto.agenda() != null &&
+                !dto.agenda().isEmpty()) {
+            novoCliente.setAgenda(new ArrayList<Telefone>());
+            for (TelefoneDTO tel : dto.agenda()) {
                 Telefone telefone = new Telefone();
                 telefone.setCodigoArea(tel.codigoArea());
                 telefone.setNumero(tel.numero());
-                novoCliente.getListaTelefone().add(telefone);
+                novoCliente.getAgenda().add(telefone);
             }
         }
 
@@ -69,8 +69,21 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setNome(dto.nome());
         cliente.setSenha(dto.senha());
 
-        // falta a implementacao dos telefones
-        // vcs (ALUNOS) devem implementar!!!!!
+        List<Telefone> telefones = new ArrayList<Telefone>();
+
+        if (dto.agenda() != null && !dto.agenda().isEmpty()) {
+            cliente.setAgenda(new ArrayList<Telefone>());
+            for (TelefoneDTO tel : dto.agenda()) {
+                Telefone telefone = new Telefone();
+
+                telefone.setCodigoArea(tel.codigoArea());
+                telefone.setNumero(tel.numero());
+
+                telefones.add(telefone);
+            }
+        }
+
+        cliente.setAgenda(telefones);
 
         return ClienteResponseDTO.valueOf(cliente);
     }

@@ -7,9 +7,9 @@ insert into produto (marca, modelo, categoria, cor, tamanho, valor) values('Adid
 insert into produto (marca, modelo, categoria, cor, tamanho, valor) values('Vans', 'Old Skool', 'SKATE', 'Preto', 41, 399.99);
 insert into produto (marca, modelo, categoria, cor, tamanho, valor) values('Nike', 'Zoom Fly', 'CORRIDA', 'Rosa', 37, 499.99);
 
-insert into pedido (id_cliente, id_produto, dataCompra, formaPagamento, statusPedido) values(2, 1, 2023-02-22, 'PIX','ENVIADO');
-insert into pedido (id_cliente, id_produto, dataCompra, formaPagamento, statusPedido) values(1, 2, 2023-04-03, 'BOLETO','ENTREGUE');
-insert into pedido (id_cliente, id_produto, dataCompra, formaPagamento, statusPedido) values(3, 3, 2023-10-06, 'PIX','PAGO');
+-- insert into pedido (id_cliente, id_produto, dataCompra, formaPagamento, statusPedido) values(2, 1, 2023-02-22, 'PIX','ENVIADO');
+-- insert into pedido (id_cliente, id_produto, dataCompra, formaPagamento, statusPedido) values(1, 2, 2023-04-03, 'BOLETO','ENTREGUE');
+-- insert into pedido (id_cliente, id_produto, dataCompra, formaPagamento, statusPedido) values(3, 3, 2023-10-06, 'PIX','PAGO');
 
 insert into cliente (nome, email, senha) values('Ead', 'ead@example.com', 'qazwsx');
 insert into cliente (nome, email, senha) values('Éster', 'ester@example.com', 'senha789');

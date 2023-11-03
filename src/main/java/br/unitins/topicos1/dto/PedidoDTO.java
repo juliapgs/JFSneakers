@@ -6,20 +6,12 @@ import java.time.LocalDate;
 
 public class PedidoDTO {
 
-    private Long clienteId;
+    private Long usuarioId;
     private Long produtoId;
     private Long enderecoId;
     private LocalDate dataCompra;
     private FormaPagamento formaPagamento;
     private StatusPedido statusPedido;
-
-    public Long getClienteId() {
-        return clienteId;
-    }
-
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
-    }
 
     public Long getProdutoId() { // Adicione este método
         return produtoId;
@@ -59,5 +51,13 @@ public class PedidoDTO {
 
     public void setEnderecoId(Long enderecoId) {
         this.enderecoId = enderecoId;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }

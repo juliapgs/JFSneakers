@@ -20,7 +20,7 @@ public class PedidoServiceImpl implements PedidoService {
     PedidoRepository repository;
 
     @Inject
-    ClienteService clienteService;
+    UsuarioService usuarioService;
     
     @Inject
     EnderecoService enderecoService;
@@ -33,7 +33,7 @@ public class PedidoServiceImpl implements PedidoService {
         novoPedido.setFormaPagamento(dto.getFormaPagamento());
         novoPedido.setStatusPedido(dto.getStatusPedido());
 
-        novoPedido.setClienteId(dto.getClienteId());
+        novoPedido.setUsuarioId(dto.getUsuarioId());
         novoPedido.setProdutoId(dto.getProdutoId());
         novoPedido.setEnderecoId(dto.getEnderecoId());
 
@@ -51,7 +51,7 @@ public class PedidoServiceImpl implements PedidoService {
             pedido.setFormaPagamento(dto.getFormaPagamento());
             pedido.setStatusPedido(dto.getStatusPedido());
 
-            pedido.setClienteId(dto.getClienteId());
+            pedido.setUsuarioId(dto.getUsuarioId());
             pedido.setProdutoId(dto.getProdutoId());
             pedido.setEnderecoId(dto.getEnderecoId());
         } else {

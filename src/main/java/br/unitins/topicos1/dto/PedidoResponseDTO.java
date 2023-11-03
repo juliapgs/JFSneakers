@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public record PedidoResponseDTO(
     Long id,
-    Long clienteId,
+    Long usuarioId,
     Long produtoId,
     Long enderecoId,
     LocalDate dataCompra,
@@ -17,7 +17,7 @@ public record PedidoResponseDTO(
     public static PedidoResponseDTO valueOf(Pedido pedido){
         return new PedidoResponseDTO(
             pedido.getId(),
-            pedido.getClienteId(),
+            pedido.getUsuarioId(),
             pedido.getProdutoId(),
             pedido.getEnderecoId(),
             pedido.getDataCompra(),

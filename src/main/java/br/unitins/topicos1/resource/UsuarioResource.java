@@ -1,10 +1,10 @@
 package br.unitins.topicos1.resource;
 
-import br.unitins.topicos1.dto.FuncionarioDTO;
-import br.unitins.topicos1.dto.FuncionarioResponseDTO;
-import br.unitins.topicos1.service.FuncionarioService;
+import com.oracle.svm.core.annotate.Inject;
 
-import jakarta.inject.Inject;
+import br.unitins.topicos1.dto.UsuarioDTO;
+import br.unitins.topicos1.service.UsuarioService;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -17,28 +17,28 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-@Path("/funcionarios")
+@Path("/usuarios")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class FuncionarioResource {
-
+public class UsuarioResource {
     @Inject
-    FuncionarioService service;
+    UsuarioService service;
 
     @POST
-    public Response insert(FuncionarioDTO dto) {
-        FuncionarioResponseDTO retorno = service.insert(dto);
-        return Response.status(201).entity(retorno).build();
+    public Response insert(UsuarioDTO dto) {
+        return Response.status(Status.CREATED).entity(service.insert(dto)).build();
     }
 
     @PUT
+    @Transactional
     @Path("/{id}")
-    public Response update(FuncionarioDTO dto, @PathParam("id") Long id) {
+    public Response update(UsuarioDTO dto, @PathParam("id") Long id) {
         service.update(dto, id);
         return Response.noContent().build();
     }
 
     @DELETE
+    @Transactional
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);
@@ -53,12 +53,7 @@ public class FuncionarioResource {
     @GET
     @Path("/{id}")
     public Response findById(@PathParam("id") Long id) {
-        FuncionarioResponseDTO funcionario = service.findById(id);
-        if (funcionario != null) {
-            return Response.ok(funcionario).build();
-        } else {
-            return Response.status(Status.NOT_FOUND).build();
-        }
+        return Response.ok(service.findById(id)).build();
     }
 
     @GET
